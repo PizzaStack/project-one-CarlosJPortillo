@@ -31,6 +31,9 @@ public class EmployeeLogin extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		System.out.println(username);
 		LogInService lIS = new LogInService(); 
 		Employee employee = lIS.getEmployeeByCredentials(request.getParameter("username"), request.getParameter("password"));
 		response.setContentType("text/html");

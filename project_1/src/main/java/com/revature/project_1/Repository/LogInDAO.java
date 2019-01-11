@@ -25,14 +25,14 @@ public class LogInDAO {
 	private Connection connection;
 	private Statement statement;
 	private ResultSet resultSet;
-	private String url;
-	private String userName;
-	private String passWord;
+	private String url = "jdbc:postgresql://cjportillo89.cwrr2qklkyum.us-east-2.rds.amazonaws.com:5432/ReinbursementDatabase";
+	private String userName = "cjportillo89";
+	private String passWord = "augmaticdisport22-";
 	private String sql;
 	
-	public LogInDAO() {
+	/*public LogInDAO() {
 		try {
-			properties.load(new FileInputStream("connection.properties"));
+			properties.load(new FileInputStream("C:\\Users\\Carlos\\Documents\\GitHub\\project-one-CarlosJPortillo\\project_1"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,12 +46,16 @@ public class LogInDAO {
 		
 		PropertyConfigurator.configure(System.getProperty("user.dir") + File.separator +
 				"log4j.properties");
-	}
+	}*/
 	public void openConnection() {
 		try {
+			Class.forName("org.postgresql.Driver");
 			connection = DriverManager.getConnection(url, userName, passWord);
 			statement = connection.createStatement();
 			logger.debug("Connection made to database");
+			System.out.println("Test");
+		} catch(ClassNotFoundException ex){
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,7 +67,7 @@ public class LogInDAO {
 	}
 	//see if user and return an employee object 
 	public Employee getEmployeeInformation(String username, String password) {
-		sql =  "SELECT * from employees where username = " + username + " password = " + password + ";";
+		sql =  "SELECT * from employees where username = '" + username + "' and password = '" + password + "';";
 		try {
 			resultSet = statement.executeQuery(sql);
 			if(resultSet.next()) {

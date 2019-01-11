@@ -1,16 +1,19 @@
 function makeAjaxRequest(userName, password){
     let xhr = new XMLHttpRequest();
-    xhtr.onreadystatechange = function(){
+    xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             if(xhr.responseText == "success" ){
-            	window.location.replace("https://www.google.com");
+            	window.location.replace("http://localhost:8080/project_1/employee.html");
             }
-            else if (xhr.responseText == "failure"){
-            	
+            else{
+            	alert("Something went wrong");
             }
         }
     } 
-    xhr.open("Get", "loginServlet", true);
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    xhr.open("GET", "http://localhost:8080/project_1/loginServlet?username=" + username + "&password=" + 
+    		password, true);
     xhr.send();
 
 }
