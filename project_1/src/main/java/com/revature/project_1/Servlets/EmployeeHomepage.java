@@ -40,6 +40,11 @@ public class EmployeeHomepage extends HttpServlet {
 	        out.print(requestsJson);
 	        out.flush();   
 		}
+		else {
+			response.setContentType("text/html");
+			PrintWriter out = response.getWriter();
+			out.print("Not Logged In");
+		}
 				
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}

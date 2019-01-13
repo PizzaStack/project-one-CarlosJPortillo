@@ -2,6 +2,13 @@
     background-color:palegreen;
     text-align:center;
 }
+.rowHeader{
+	background-color:#E857EE;
+}
 /* The slider */
-
-
+#pendingTable{
+	visibility:hidden
+}
+#acceptedTable{
+	visibility:hidden
+}
