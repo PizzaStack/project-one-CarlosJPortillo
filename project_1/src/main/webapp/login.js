@@ -5,7 +5,7 @@ function makeAjaxRequest(userName, password){
             if(xhr.responseText == "success" ){
             	window.location.replace("http://localhost:8080/project_1/employee.html");
             }
-            else{
+            else if(xhr.responseText == "failure"){
             	alert("Something went wrong");
             }
         }

@@ -13,6 +13,7 @@ public class LogInService {
 	
 	public Employee getEmployeeByCredentials(String username, String password) {
 		Employee employee = logInDAO.getEmployeeInformation(username, password);
+		logInDAO.closeConnection();
 		return employee;
 	}
 
