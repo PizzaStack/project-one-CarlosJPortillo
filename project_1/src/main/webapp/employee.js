@@ -60,3 +60,6 @@ function checkRequestsFound(pRequestCounter, aRequestCounter, pTable, aTable){
 		aTable.innerHTML = "<H2>No Matches Found</H2>";
 	}
 }
+function LogOut(){
+	
+}

@@ -7,7 +7,7 @@
         <meta charset="utf-8">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <script type = "text/javascript" src = "manager.js"> </script>
+        <script type = "text/javascript" src = "submit_new_request.js"> </script>
         <link rel="stylesheet" type="text/css" href="style.css">
 
     </head>
@@ -20,8 +20,13 @@
                         <div class = "col-md-2"><br/><button>Logout</button></div>
                     </div>
                     <div class = "row"> <div class = "col-md-1">&nbsp;</div>
-                    <div class = "col-md-2"><p>Reinbursement Type</p><select><option value= "travel">Travel</option><option value ="certification">
-                    Certification Test</option></select></div></div>
+                    <div class = "col-md-2"><p>Reinbursement Type</p><select id = "reinbursementType"><option value= "Relocation_Client">Relocation to Client Project</option><option value ="C">
+                    Certification Test</option><option value="Interview Expenses">Interview Expenses</option><option value = "Miscellaneous">Miscellaneous</option></select></div>
+                    <div class = "col-md-3"><p>Receipt Upload</p><form id="file-form" action="handler.php" method="POST">
+  											<input type="file" id="fileSelect" name="photos[]" />
+											</form></div></div>
+					<div class = "row"> <div class = "col-md-2">&nbsp;</div><div class = "col-md-2"><p></p>
+					<button id="submitButton" onclick = "SubmitRequest()">&nbsp; Submit Request &nbsp;</button></div></div>
                     </div>
     </body>
     </html>

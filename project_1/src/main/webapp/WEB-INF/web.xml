@@ -18,4 +18,14 @@
     <servlet-name>EmployeeHomepage</servlet-name>
     <url-pattern>/EmployeeHomepage</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubmitNewRequest</display-name>
+    <servlet-name>SubmitNewRequest</servlet-name>
+    <servlet-class>com.revature.project_1.Servlets.SubmitNewRequest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubmitNewRequest</servlet-name>
+    <url-pattern>/SubmitNewRequest</url-pattern>
+  </servlet-mapping>
 </web-app>
