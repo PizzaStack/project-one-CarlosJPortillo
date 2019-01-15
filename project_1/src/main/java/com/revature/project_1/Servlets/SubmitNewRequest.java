@@ -11,9 +11,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.revature.project_1.Services.SubmitNewRequestService;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 
@@ -24,8 +28,6 @@ public class SubmitNewRequest extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//	String requestType = request.getParameter("requestType");
-		//	request.removeAttribute("requestType");
 		ServletFileUpload sf = new ServletFileUpload(new DiskFileItemFactory());
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
@@ -47,7 +49,20 @@ public class SubmitNewRequest extends HttpServlet {
 			out.write("Failed Upload");
 		}
 		
-		
 	}
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession(false);
+		String fileName = request.getParameter("fileName");
+		String reimbursementType = request.getParameter("reimbursementType");
+		
+		int employeeID = (Integer) session.getAttribute("employeeID");
+		String username = (String) session.getAttribute("employeeUserName");
+		SubmitNewRequestService sNRS = new SubmitNewRequestService();
+		if(sNRS.createRequest(fileName, reimbursementType, employeeID)) {
+			out.write("Request has been submitted!");
+		}
+	}
+	
 }

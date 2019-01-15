@@ -63,3 +63,6 @@ function checkRequestsFound(pRequestCounter, aRequestCounter, pTable, aTable){
 function LogOut(){
 	
 }
+function directToSubmissionPage(){
+	window.location.replace("http://localhost:8080/project_1/submit_new_request.html");
+}

@@ -49,10 +49,12 @@ function MakeAjaxCalls(formData){
 			  xhr = new XMLHttpRequest();
 			  let reimbursementDropDown = document.getElementById("reinbursementType");
 		      let reimbursementType = reimbursementDropDown.options[reimbursementDropDown.selectedIndex].text;
-			  xhr.open('GET', "http://localhost:8080/project_1/SubmitNewRequest?fileName=" + data + "reimbursementType=" + reimbursementType, true);
+			  xhr.open('GET', "http://localhost:8080/project_1/SubmitNewRequest?fileName=" + data + "&reimbursementType=" + reimbursementType, true);
 			  xhr.onload = () => {
 				    if (xhr.status === 200 && xhr.readyState == 4) {
-				      //----
+				      if(xhr.response == "Request has been submitted"){
+				    	  
+				      }
 				    } 
 				  };
 			 xhr.send(null) 

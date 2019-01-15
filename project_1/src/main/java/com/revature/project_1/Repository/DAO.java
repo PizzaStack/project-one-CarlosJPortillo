@@ -13,7 +13,7 @@ public abstract class DAO {
 	private Properties properties = new Properties();
 	private static Logger logger = Logger.getLogger(LogInDAO.class);
 	
-	private Connection connection;
+	protected Connection connection;
 	protected Statement statement;
 	protected ResultSet resultSet;
 	private String url = "jdbc:postgresql://cjportillo89.cwrr2qklkyum.us-east-2.rds.amazonaws.com:5432/ReinbursementDatabase";
@@ -66,6 +66,22 @@ public abstract class DAO {
 			e.printStackTrace();
 			logger.error("failed to close connection");
 		}
+	}
+	public int getMaxID(String table, String columnValue) {
+		int maxId = 0;
+	    sql =  "SELECT MAX( " + columnValue + ") as MaxId FROM " + table;
+		try {
+			resultSet = statement.executeQuery(sql);
+			if(resultSet.next()) {
+				maxId = resultSet.getInt("MaxId");
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("An error has occured with trying to execute query");
+			
+		}
+		maxId++;
+		return maxId;
 	}
 
 }
