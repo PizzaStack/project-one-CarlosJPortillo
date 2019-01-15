@@ -28,4 +28,24 @@
     <servlet-name>SubmitNewRequest</servlet-name>
     <url-pattern>/SubmitNewRequest</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CheckedLoggedIn</display-name>
+    <servlet-name>CheckedLoggedIn</servlet-name>
+    <servlet-class>com.revature.project_1.Servlets.CheckedLoggedIn</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckedLoggedIn</servlet-name>
+    <url-pattern>/CheckedLoggedIn</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LogOutUser</display-name>
+    <servlet-name>LogOutUser</servlet-name>
+    <servlet-class>com.revature.project_1.Servlets.LogOutUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogOutUser</servlet-name>
+    <url-pattern>/LogOutUser</url-pattern>
+  </servlet-mapping>
 </web-app>

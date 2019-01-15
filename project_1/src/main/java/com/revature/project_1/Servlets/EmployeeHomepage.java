@@ -41,9 +41,7 @@ public class EmployeeHomepage extends HttpServlet {
 	        out.flush();   
 		}
 		else {
-			response.setContentType("text/html");
-			PrintWriter out = response.getWriter();
-			out.print("Not Logged In");
+			CheckedLoggedIn.SendNotLoggedInResponse(response);
 		}
 				
 		//response.getWriter().append("Served at: ").append(request.getContextPath());

@@ -60,9 +60,7 @@ function checkRequestsFound(pRequestCounter, aRequestCounter, pTable, aTable){
 		aTable.innerHTML = "<H2>No Matches Found</H2>";
 	}
 }
-function LogOut(){
-	
-}
+
 function directToSubmissionPage(){
 	window.location.replace("http://localhost:8080/project_1/submit_new_request.html");
 }
