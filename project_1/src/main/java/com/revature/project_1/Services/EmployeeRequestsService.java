@@ -13,8 +13,8 @@ public class EmployeeRequestsService {
 		employeeRequestsDAO = new EmployeeRequestsDAO();
 		employeeRequestsDAO.openConnection();
 	}
-	public ArrayList<ReimbursementRequest> getRequests(int employee_ID) {
-		requests = employeeRequestsDAO.getRequests(employee_ID);
+	public ArrayList<ReimbursementRequest> getRequests(int employee_ID, String employeeType) {
+		requests = employeeRequestsDAO.getRequests(employee_ID, employeeType);
 		employeeRequestsDAO.closeConnection();	
 		return requests;
 	}

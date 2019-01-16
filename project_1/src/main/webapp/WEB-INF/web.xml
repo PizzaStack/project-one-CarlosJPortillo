@@ -48,4 +48,14 @@
     <servlet-name>LogOutUser</servlet-name>
     <url-pattern>/LogOutUser</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManagerHomepage</display-name>
+    <servlet-name>ManagerHomepage</servlet-name>
+    <servlet-class>com.revature.project_1.Servlets.ManagerHomepage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManagerHomepage</servlet-name>
+    <url-pattern>/ManagerHomepage</url-pattern>
+  </servlet-mapping>
 </web-app>

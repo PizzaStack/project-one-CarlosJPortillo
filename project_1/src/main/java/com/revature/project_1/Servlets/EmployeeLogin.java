@@ -19,8 +19,9 @@ public class EmployeeLogin extends HttpServlet {
 		// TODO Auto-generated method stub
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String employeeType = request.getParameter("selection");
 		LogInService lIS = new LogInService(); 
-		Employee employee = lIS.getEmployeeByCredentials(username, password);
+		Employee employee = lIS.getEmployeeByCredentials(username, password, employeeType);
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		if(employee == null) {
@@ -31,6 +32,7 @@ public class EmployeeLogin extends HttpServlet {
 			session.setAttribute("employeeID", employee.getEmployeeID());
 			session.setAttribute("employeeUserName", employee.getUsername());
 			session.setAttribute("employeePassword", employee.getPassword());
+			session.setAttribute("employeeType", employeeType);
 			out.write("success");
 		}	
 	}

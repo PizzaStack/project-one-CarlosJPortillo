@@ -20,8 +20,8 @@ import com.revature.project_1.Model.Employee;
 public class LogInDAO extends DAO {
 	
 	//see if user and return an employee object 
-	public Employee getEmployeeInformation(String username, String password) {
-		sql =  "SELECT * from employees where username = '" + username + "' and password = '" + password + "';";
+	public Employee getEmployeeInformation(String username, String password, String tableName) {
+		sql =  "SELECT * from " + tableName + " where username = '" + username + "' and password = '" + password + "';";
 		try {
 			resultSet = statement.executeQuery(sql);
 			if(resultSet.next()) {

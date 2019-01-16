@@ -30,8 +30,9 @@ public class EmployeeHomepage extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		if(session!= null) {
 			int employeeID = (Integer) session.getAttribute("employeeID");
+			String employeeType = (String) session.getAttribute("employeeType");
 			EmployeeRequestsService eRS = new EmployeeRequestsService();
-			ArrayList<ReimbursementRequest> requests = eRS.getRequests(employeeID);
+			ArrayList<ReimbursementRequest> requests = eRS.getRequests(employeeID, employeeType);
 			Gson gson = new Gson();
 			String requestsJson = gson.toJson(requests);
 			PrintWriter out = response.getWriter();

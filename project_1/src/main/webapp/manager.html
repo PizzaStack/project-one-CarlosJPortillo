@@ -6,25 +6,44 @@
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <script type = "text/javascript" src = "manager.js"> </script>
+        <script type = "text/javascript" src = "employee.js"> </script>
+        <script type = "text/javascript" src = "logout.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css">
 
     </head>
-    <body>
-    	<div class = "container-fluid">
+    <body onload = "GetRequests()">
+            <div class = "container-fluid">
                     <div class = "row"><div id= "Banner" class = "col-md-12"> <h1>Manager Homepage</h1></div></div>
                     <div class = "row">
                         <div class = "col-md-1">&nbsp;</div>
-                        <div class = "col-md-9"><h2>Welcome Manager</h2></div>
-                        <div class = "col-md-2"><br/><button>Logout</button></div>
+                        <div id = "welcomeDisplay"class = "col-md-9"><h2>Welcome Manager</h2></div>
+                        <div class = "col-md-2"><br/><button onclick = "LogUserOut()">Logout</button></div>
                     </div>
                     <div class = "row">
                             <div class = "col-md-1">&nbsp;</div>
-                            <div class = "col-md-4"><button>View Pending Requests</button>&nbsp;&nbsp;&nbsp;<button>View Employees</button></div>
-                             
+                            <div class = "col-md-5"><button onclick = "DirectToEmployeesPage()">View Employees</button></div>
                     </div>
-                    </div>
+                    <div class = "row"><div class = "col-md-1"></div><div class = "col-md-4"><h3>Pending Requests</h3>
+                    <table id = "pendingTable" class = "table table-bordered"><tr class ="rowHeader">
+					<th><H5>Request ID</H5></th>
+					<th><H5>Request Type</H5></th>
+					<th><H5>Date Submitted</H5></th>
+					<th><H5>Employee Username</H5></th>
+					</tr> </table></div>
+                    <div class = "col-md-6"><h3>Resolved Reinbursements</h3><table id = "resolvedTable"class = "table table-bordered" >
+                    <tr class = "rowHeader">
+					<th><H5>Request ID</H5></th>
+					<th><H5>Request Type</H5></th>
+					<th><H5>Date Submitted</H5></th>
+					<th><H5>Employee Username</H5></th>
+					<th><H5>Manager Who Resolved</H5></th>
+					<th><H5>Accepted/Rejected</H5>
+					</tr> 
+                    </table></div><div class = "col-md-1"></div></div>
+            </div>
+            
 
     </body>
 </html>

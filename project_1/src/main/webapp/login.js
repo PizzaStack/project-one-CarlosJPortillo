@@ -1,9 +1,16 @@
 function makeAjaxRequest(userName, password){
     let xhr = new XMLHttpRequest();
+    let selectionDropDown = document.getElementById("selection");
+    let selection = selectionDropDown.options[selectionDropDown.selectedIndex].text;
     xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             if(xhr.responseText == "success" ){
-            	window.location.replace("http://localhost:8080/project_1/employee.html");
+            	if(selection == "Employee"){
+            		window.location.replace("http://localhost:8080/project_1/employee.html");
+            	}
+            	else{
+            		window.location.replace("http://localhost:8080/project_1/manager.html");
+            	}
             }
             else if(xhr.responseText == "failure"){
             	alert("Something went wrong");
@@ -13,7 +20,7 @@ function makeAjaxRequest(userName, password){
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
     xhr.open("GET", "http://localhost:8080/project_1/loginServlet?username=" + username + "&password=" + 
-    		password, true);
+        		password +  "&selection=" + selection, true);
     xhr.send();
 
 }

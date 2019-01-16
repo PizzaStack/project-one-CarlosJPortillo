@@ -7,10 +7,12 @@ public class ReimbursementRequest {
 	private String requestType;
 	private Date dateSubmitted;
 	private String employeeUsername;
-	private boolean accepted;
+	private String accepted;
 	private int acceptedManagerID;
+	private String managerUsername;
 	
-	public ReimbursementRequest(int requestID, String requestType, Date dateSubmitted, String employeeUsername, boolean accepted, int acceptedManagerID) {
+	public ReimbursementRequest(int requestID, String requestType, Date dateSubmitted, String employeeUsername, String accepted, 
+			int acceptedManagerID, String managerUsername) {
 		
 		this.requestID = requestID;
 		this.requestType = requestType;
@@ -18,6 +20,8 @@ public class ReimbursementRequest {
 		this.employeeUsername = employeeUsername;
 		this.accepted = accepted;
 		this.acceptedManagerID = acceptedManagerID;
+		this.managerUsername = managerUsername;
+		
 	}
 	
 	public int getRequestID() {
@@ -32,10 +36,10 @@ public class ReimbursementRequest {
 	public void setRequestType(String requestType) {
 		this.requestType = requestType;
 	}
-	public boolean isAccepted() {
+	public String isAccepted() {
 		return accepted;
 	}
-	public void setAccepted(boolean accepted) {
+	public void setAccepted(String accepted) {
 		this.accepted = accepted;
 	}
 	public int getAcceptedManagerID() {
