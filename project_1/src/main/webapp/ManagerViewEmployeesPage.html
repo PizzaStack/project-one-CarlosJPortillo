@@ -1,0 +1,34 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type = "text/javascript" src = "employee.js"> </script>
+        <script type = "text/javascript" src = "logout.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
+
+    </head>
+    <body onload = "getEmployees()">
+            <div class = "container-fluid">
+                    <div class = "row"><div id= "Banner" class = "col-md-12"> <h1>Manager View Employees Page</h1></div></div>
+                    <div class = "row"><div class = "col-md-10"></div> <div class = "col-md-2"><br/><button onclick = "LogUserOut()">Logout</button></div></div>
+                    <div class = "row">
+                        <div class = "col-md-1">&nbsp;</div>
+                        <div id = "welcomeDisplay"class = "col-md-9"><h2>Here are all the employees in the system</h2></div>
+                    </div>
+                    <div class = "row"><div class = "col-md-1">&nbsp;</div><div class = "col-md-7">&nbsp; &nbsp; Enter an employee's username whom you wish
+                    to see their requests:<input id="username" type ="text" name ="username" style = "margin-left: 14px"><button onClick = "SeeEmployeeRequests()">See Requests</button></div></div>
+                    <div class = "row"><div class = "col-md-1"></div><div class = "col-md-6"><h3>Employees</h3>
+                    <table id = "employeesTable" class = "table table-bordered"><tr class ="rowHeader">
+					<th><H5>Employee ID</H5></th>
+					<th><H5>Username</H5></th>
+					<th><H5>Password</H5></th>
+					</tr> </table></div>
+                    </div>
+                    </div>
+  </body>

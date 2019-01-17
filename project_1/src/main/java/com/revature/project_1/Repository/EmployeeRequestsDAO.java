@@ -45,4 +45,22 @@ public class EmployeeRequestsDAO extends DAO {
 		
 		return null;
 	}
+	public ArrayList<Employee> GetEmployees(){
+		sql = "SELECT * from employees";
+		ArrayList<Employee> employees = new ArrayList<Employee>();
+		try {
+			resultSet = statement.executeQuery(sql);
+			while(resultSet.next()) {
+				employees.add(new Employee(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3)));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			employees = null;
+		}
+		return employees;
+	}
+	public ArrayList<ReimbursementRequest> getRequestsFromEmployee(String username){
+		return null;
+	}
 }

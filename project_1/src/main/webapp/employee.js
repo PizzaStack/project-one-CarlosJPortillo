@@ -81,3 +81,56 @@ function checkRequestsFound(pRequestCounter, aRequestCounter, pTable, aTable){
 function directToSubmissionPage(){
 	window.location.replace("http://localhost:8080/project_1/submit_new_request.html");
 }
+function directToManagerViewEmployeesPage(){
+	window.location.replace("http://localhost:8080/project_1/ManagerViewEmployeesPage.html");
+}
+function getEmployees(){
+	let xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200){
+				let employees = JSON.parse(xhr.response);
+				addEmployeeRow(employees);
+			}
+		}
+	xhr.open("POST", "http://localhost:8080/project_1/SeeEmployees");
+	xhr.send();
+}
+function addEmployeeRow(employees){
+	let employeesTable = document.getElementById("employeesTable");
+	for(i = 0; i < employees.length; i++){
+		if(i%2 ==1)
+		{
+			employeesTable.innerHTML += "<tr style = \"background-color:#E857EE;\"><th>" + employees[i].employeeID + "</th><th>" + employees[i].username + "</th><th>" + 
+			employees.password + "</th></tr>";
+		}
+		else{
+			employeesTable.innerHTML += "<tr style = \"background-color:#4EE9FA;\"><th>" + employees[i].employeeID + "</th><th>" + employees[i].username + "</th><th>" + 
+			employees[i].password + "</th></tr>";
+		}
+	}
+}
+function validateInformation(){
+	let userName = document.getElementById("username").value;
+
+	if(userName.length == 0){
+		alert("Username field as empty");
+	}
+	else{
+		getRequestFromEmployee(userName);
+	}
+}
+function getRequestsFromEmployee(username){
+	const promise = new Promise((resolve, reject) =>{
+		xhr = new XMLHttpRequest();
+		xhr.open('GET', "http://localhost:8080/project_1/SeeEmployees?username = " + username, true);
+		xhr.onload = () => {
+		    if (xhr.status === 200 && xhr.readyState == 4) {
+		    	resolve(xhr.response)
+		    }
+		};
+		xhr.send(null);
+	});
+	promise.then((data)=>{
+		
+	})
+}

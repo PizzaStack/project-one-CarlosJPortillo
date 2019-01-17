@@ -58,4 +58,14 @@
     <servlet-name>ManagerHomepage</servlet-name>
     <url-pattern>/ManagerHomepage</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SeeEmployees</display-name>
+    <servlet-name>SeeEmployees</servlet-name>
+    <servlet-class>com.revature.project_1.Servlets.SeeEmployees</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SeeEmployees</servlet-name>
+    <url-pattern>/SeeEmployees</url-pattern>
+  </servlet-mapping>
 </web-app>

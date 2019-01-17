@@ -2,6 +2,7 @@ package com.revature.project_1.Services;
 
 import java.util.ArrayList;
 
+import com.revature.project_1.Model.Employee;
 import com.revature.project_1.Model.ReimbursementRequest;
 import com.revature.project_1.Repository.EmployeeRequestsDAO;
 
@@ -21,6 +22,12 @@ public class EmployeeRequestsService {
 	public void setRequests(ArrayList<ReimbursementRequest> requests) {
 		this.requests = requests;
 	}
-
+	public ArrayList<Employee> getEmployees(){
+		ArrayList<Employee> employees = employeeRequestsDAO.GetEmployees();
+		return employees;
+	}
+	public ArrayList<ReimbursementRequest >getRequestsByEmployee(String username){
+		return null;
+	}
 
 }
