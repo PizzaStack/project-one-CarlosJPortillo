@@ -26,8 +26,9 @@ public class EmployeeRequestsService {
 		ArrayList<Employee> employees = employeeRequestsDAO.GetEmployees();
 		return employees;
 	}
-	public ArrayList<ReimbursementRequest >getRequestsByEmployee(String username){
-		return null;
+	public ArrayList<ReimbursementRequest>getRequestsFromEmployee(String username){
+		ArrayList<ReimbursementRequest> requests = employeeRequestsDAO.getRequestsFromEmployee(username);
+		return requests;
 	}
 
 }

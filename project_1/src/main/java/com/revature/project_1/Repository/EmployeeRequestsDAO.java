@@ -2,6 +2,7 @@ package com.revature.project_1.Repository;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.revature.project_1.Model.Employee;
 import com.revature.project_1.Model.ReimbursementRequest;
@@ -30,7 +31,7 @@ public class EmployeeRequestsDAO extends DAO {
 				}
 				else {
 					requests.add(new ReimbursementRequest(resultSet.getInt(1), resultSet.getString(2), resultSet.getDate(3), resultSet.getString(6), 
-							resultSet.getString(4), resultSet.getInt(5), resultSet.getString(6)));	
+							resultSet.getString(4), resultSet.getInt(5), resultSet.getString(7)));	
 				}
 						
 			}
@@ -61,6 +62,26 @@ public class EmployeeRequestsDAO extends DAO {
 		return employees;
 	}
 	public ArrayList<ReimbursementRequest> getRequestsFromEmployee(String username){
+		sql ="Select emps.username, rr.request_id, rr.approved, rr.request_type, rr.date_submitted, mg.manager_id, mg.username, rr.file_name \r\n" + 
+				"from employees as emps inner join reimbursementrequests as rr on \r\n" + 
+				"emps.employee_id = rr.employee_id inner join managers as mg on rr.managerapproved_id = mg.manager_id\r\n" + 
+				"where emps.username = '" + username + "' order by rr.request_id;";
+		ArrayList<ReimbursementRequest> requests = new ArrayList<ReimbursementRequest>();
+		try {
+			resultSet = statement.executeQuery(sql);
+			int i = 0;
+			while(resultSet.next()) {
+				requests.add(new ReimbursementRequest(resultSet.getInt(2), resultSet.getString(4), resultSet.getDate(5), resultSet.getString(1),
+						resultSet.getString(3), resultSet.getInt(6), resultSet.getString(7)));
+				requests.get(0).setFileName(resultSet.getString(8));
+			}
+			return requests;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			requests = null;
+		}
+		
 		return null;
 	}
 }

@@ -68,4 +68,14 @@
     <servlet-name>SeeEmployees</servlet-name>
     <url-pattern>/SeeEmployees</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Pull_Image</display-name>
+    <servlet-name>Pull_Image</servlet-name>
+    <servlet-class>com.revature.project_1.Servlets.Pull_Image</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Pull_Image</servlet-name>
+    <url-pattern>/Pull_Image</url-pattern>
+  </servlet-mapping>
 </web-app>

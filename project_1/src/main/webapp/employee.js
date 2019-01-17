@@ -116,21 +116,94 @@ function validateInformation(){
 		alert("Username field as empty");
 	}
 	else{
-		getRequestFromEmployee(userName);
+		getRequestsFromEmployee(userName);
 	}
 }
 function getRequestsFromEmployee(username){
 	const promise = new Promise((resolve, reject) =>{
 		xhr = new XMLHttpRequest();
-		xhr.open('GET', "http://localhost:8080/project_1/SeeEmployees?username = " + username, true);
+		xhr.open('GET', "http://localhost:8080/project_1/SeeEmployees?username=" + username, true);
 		xhr.onload = () => {
 		    if (xhr.status === 200 && xhr.readyState == 4) {
-		    	resolve(xhr.response)
+		    	let requests = JSON.parse(xhr.response);
+		    	resolve(requests)
 		    }
 		};
 		xhr.send(null);
 	});
 	promise.then((data)=>{
-		
+		showRequests(data);
 	})
+}
+function showRequests(requests){
+	let requestsTable = document.getElementById("employeesTable");
+	requestsTable.innerHTML = "";
+	let tableTitle = document.getElementById("tableTitle");
+	tableTitle.innerHTML = "Requests From Employee";
+	requestsTable.innerHTML = "<tr class =\"rowHeader\">" +
+			"<th><H5>Employee Username</H5></th><th><H5>Request ID</H5>" +
+			"</th><th><H5>Status</H5></th><th><H5>Request Type</H5></th><th><H5>Date Submitted</H5></th>" +
+			"<th><H5>Manager Whom Resolved</H5></th>" +
+			"<th style = \"display:none;\"><H5>File Name</H5></th></tr> ";
+	
+	for(i = 0; i < requests.length; i++){
+		if(requests[i].managerUsername== ""){
+			requests[i].managerUsername = "None";
+		}
+		if(i%2 ==1)
+		{
+			requestsTable.innerHTML += "<tr style = \"background-color:#E857EE;\"><th>" + requests[i].employeeUsername + "</th><th>" + requests[i].requestID + 
+			"</th><th>" + requests[i].accepted + "</th><th>" + requests[i].requestType + "</th><th>" + requests[i].dateSubmitted + "</th><th>" 
+			 + requests[i].managerUsername + "</th><th style = \"display:none;\">" + requests[i].fileName + "</th></tr>";
+		}
+		else{
+			requestsTable.innerHTML += "<tr style = \"background-color:#4EE9FA;\"><th>" + requests[i].employeeUsername + "</th><th>" + requests[i].requestID + 
+			"</th><th>" + requests[i].accepted + "</th><th>" + requests[i].requestType + "</th><th>" + requests[i].dateSubmitted + "</th><th>" 
+			 + requests[i].managerUsername + "</th><th style = \"display:none;\">" + requests[i].fileName + "</th></tr>";
+		}
+		
+	}
+	giveRowsOnClickFunction(requestsTable);
+	
+}
+function giveRowsOnClickFunction(requestTable){
+	if (requestTable) {
+	  for (var i = 0; i < requestTable.rows.length; i++) {
+	    requestTable.rows[i].onclick = function() {
+	      displayRequestImage(this);
+	    };
+	  }
+	}
+}
+function displayRequestImage(tableRow){
+	if(tableRow.childNodes[2].innerHTML == "pending"){
+		let requestID = tableRow.childNodes[1].innerHTML;
+		let requestType = tableRow.childNodes[3].innerHTML;
+		let dateSubmitted = tableRow.childNodes[4].innerHTML;
+		console.log("Yay");
+		const promise = new Promise((resolve, reject) =>{
+			xhr = new XMLHttpRequest();
+			let fileName = tableRow.childNodes[6].innerHTML;
+			//let fileName = "elseq4";
+			xhr.open('GET', "http://localhost:8080/project_1/Pull_Image?filename=" + fileName, true);
+			xhr.onload = () => {
+			    if (xhr.status === 200 && xhr.readyState == 4) {
+			    	let requestsTable = document.getElementById("employeesTable");
+			    	requestsTable.innerHTML = "<tr class =\"rowHeader\">" +
+					"<th><H5>Request ID</H5></th>" + "<th><H5>Request Type</H5></th><th><H5>Date Submitted</H5></th>" +
+					"<th><H5>Image</H5></th></tr>" ;
+
+			    	requestsTable.innerHTML += "<tr style = \"background-color:#4EE9FA;\"><th>" + requestID + "</th><th>" + 
+			    	requestType + "</th><th>" + dateSubmitted + "</th><th><img width = 400, " +
+			    			"height = 400 src = \"" + xhr.response + "\"></th></tr>";
+			    	resolve();
+			    	
+			    }
+			};
+			xhr.send(null);
+		});
+		promise.then(()=>{
+			console.log("It worked!");	
+		});
+	}
 }

@@ -10,6 +10,7 @@ public class ReimbursementRequest {
 	private String accepted;
 	private int acceptedManagerID;
 	private String managerUsername;
+	private String fileName;
 	
 	public ReimbursementRequest(int requestID, String requestType, Date dateSubmitted, String employeeUsername, String accepted, 
 			int acceptedManagerID, String managerUsername) {
@@ -61,6 +62,14 @@ public class ReimbursementRequest {
 
 	public void setEmployee_username(String employeeUsername) {
 		this.employeeUsername = employeeUsername;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}		
 
 }

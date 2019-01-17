@@ -23,7 +23,15 @@ public class SeeEmployees extends HttpServlet {
 		
 		String username = request.getParameter("username");
 		EmployeeRequestsService eRS = new EmployeeRequestsService();
-		
+		eRS.getRequestsFromEmployee(username);
+		ArrayList<ReimbursementRequest> requests = eRS.getRequestsFromEmployee(username);
+		Gson gson = new Gson();
+		String requestsJson = gson.toJson(requests);
+		PrintWriter out = response.getWriter();
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		out.print(requestsJson);
+		out.flush();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
