@@ -116,6 +116,7 @@ function validateInformation(){
 		alert("Username field as empty");
 	}
 	else{
+	    document.getElementById("welcomeDisplay").style.display = 'none';
 		getRequestsFromEmployee(userName);
 	}
 }
@@ -204,6 +205,18 @@ function displayRequestImage(tableRow){
 		});
 		promise.then(()=>{
 			console.log("It worked!");	
+			approve = document.getElementById("approve").style.display = 'inline';
+			reject = document.getElementById("reject").style.display = 'inline';
+			approve.style.display = 'inline';
+			reject.style.display = 'inline';
+			approve.addEventListener("click", approveRequest);
+			reject.addEventListener("click", rejectRequest);
 		});
 	}
+}
+function approveRequest(){
+	
+}
+function rejectRequest(){
+	
 }

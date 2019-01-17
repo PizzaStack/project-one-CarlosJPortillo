@@ -5,7 +5,6 @@
 .rowHeader{
 	background-color:#E857EE;
 }
-/* The slider */
 #pendingTable{
 	visibility:hidden
 }
@@ -23,4 +22,10 @@
 }
 #pendingTable2{
 	visibility:hidden
+}
+#approve{
+	display:none;
+}
+#reject{
+	display:none;
 }
