@@ -34,8 +34,7 @@ public class SubmitNewRequest extends HttpServlet {
 		try {
 			List<FileItem> multifiles = sf.parseRequest(request);
 			for(FileItem item : multifiles) {
-				System.out.println(item.getName());
-				item.write(new File("/Users/Carlos/Documents/GitHub/project-one-CarlosJPortillo/project_1/receipt_images/" + item.getName()));
+				item.write(new File("C:\\Users\\Carlos\\Documents\\GitHub\\project-one-CarlosJPortillo\\project_1\\src\\main\\webapp\\receipt_images\\" + item.getName()));
 				out.write(item.getName());		
 			}
 		} 

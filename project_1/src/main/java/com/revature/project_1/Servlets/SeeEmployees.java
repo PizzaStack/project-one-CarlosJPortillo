@@ -23,7 +23,6 @@ public class SeeEmployees extends HttpServlet {
 		
 		String username = request.getParameter("username");
 		EmployeeRequestsService eRS = new EmployeeRequestsService();
-		eRS.getRequestsFromEmployee(username);
 		ArrayList<ReimbursementRequest> requests = eRS.getRequestsFromEmployee(username);
 		Gson gson = new Gson();
 		String requestsJson = gson.toJson(requests);

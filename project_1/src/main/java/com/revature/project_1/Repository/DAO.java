@@ -10,9 +10,9 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 public abstract class DAO {
-	private Properties properties = new Properties();
+	/*private Properties properties = new Properties();
 	private static Logger logger = Logger.getLogger(LogInDAO.class);
-	
+	*/
 	protected Connection connection;
 	protected Statement statement;
 	protected ResultSet resultSet;
@@ -43,14 +43,12 @@ public abstract class DAO {
 			Class.forName("org.postgresql.Driver");
 			connection = DriverManager.getConnection(url, userName, passWord);
 			statement = connection.createStatement();
-			logger.debug("Connection made to database");
 			System.out.println("Test");
 		} catch(ClassNotFoundException ex){
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			logger.error("Failed to connect to database");
 		}
 	}
 	public Connection getConnection() {
@@ -60,11 +58,8 @@ public abstract class DAO {
 	public void closeConnection() {
 		try {
 			connection.close();
-			logger.debug("connection closed successfully");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			logger.error("failed to close connection");
 		}
 	}
 	public int getMaxID(String table, String columnValue) {

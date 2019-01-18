@@ -78,4 +78,14 @@
     <servlet-name>Pull_Image</servlet-name>
     <url-pattern>/Pull_Image</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ApproveRejectRequest</display-name>
+    <servlet-name>ApproveRejectRequest</servlet-name>
+    <servlet-class>com.revature.project_1.Servlets.ApproveRejectRequest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApproveRejectRequest</servlet-name>
+    <url-pattern>/ApproveRejectRequest</url-pattern>
+  </servlet-mapping>
 </web-app>

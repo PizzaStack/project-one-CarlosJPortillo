@@ -73,7 +73,9 @@ public class EmployeeRequestsDAO extends DAO {
 			while(resultSet.next()) {
 				requests.add(new ReimbursementRequest(resultSet.getInt(2), resultSet.getString(4), resultSet.getDate(5), resultSet.getString(1),
 						resultSet.getString(3), resultSet.getInt(6), resultSet.getString(7)));
-				requests.get(0).setFileName(resultSet.getString(8));
+				String s1 = resultSet.getString(8);
+				requests.get(i).setFileName(resultSet.getString(8));
+				i++;
 			}
 			return requests;
 		} catch (SQLException e) {

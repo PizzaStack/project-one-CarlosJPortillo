@@ -26,7 +26,7 @@ function GetRequests(){
 						}
 					}
 				}
-				checkRequestsFound(pendingRequestsCounter, acceptedRequestsCounter, pTable, aTable);
+				checkRequestsFound(pendingRequestsCounter, resolvedRequestsCounter, pTable, aTable);
 			}
 			else if (xhr.response == "Not Logged In"){
 				alert("You are not logged in");
@@ -43,31 +43,57 @@ function addRow(response, requestsCounter, requestID, requestType, dateSubmitted
 	requestType = response[i].requestType;
 	dateSubmitted = response[i].dateSubmitted;
 	employeeUsername = response[i].employeeUsername;
-	
+	status = response[i].accepted;
+
 	let welcomeText = document.getElementById("welcomeDisplay").textContent;
 	if(welcomeText == "Welcome Employee"){
 		if(requestsCounter%2 ==0)
 		{
-			table.innerHTML += "<tr style = \"background-color:#E857EE;\"><th>" + requestID + "</th><th>" + requestType + "</th><th>" + dateSubmitted 
-			+ "</th></tr>";
+			if(table.rows[0].cells.length == 3){
+				table.innerHTML += "<tr style = \"background-color:#E857EE;\"><th>" + requestID + "</th><th>" + requestType + "</th><th>" + dateSubmitted 
+				+ "</th></tr>";
+			}
+			else{
+				table.innerHTML += "<tr style = \"background-color:#E857EE;\"><th>" + requestID + "</th><th>" + requestType + "</th><th>" + dateSubmitted 
+				+ "</th><th>" + status + "</tr>";
+			}
+
 		}                                              
 		else{
-			table.innerHTML += "<tr style = \"background-color:#4EE9FA;\"><th>" + requestID + "</th><th>" + requestType + "</th><th>" + dateSubmitted
-			+ "</th></tr>";			
+			if(table.rows[0].cells.length == 3){
+				table.innerHTML += "<tr style = \"background-color:#4EE9FA;\"><th>" + requestID + "</th><th>" + requestType + "</th><th>" + dateSubmitted 
+				+ "</th></tr>";
+			}
+			else{
+				table.innerHTML += "<tr style = \"background-color:#4EE9FA;\"><th>" + requestID + "</th><th>" + requestType + "</th><th>" + dateSubmitted 
+				+ "</th><th>" + status + "</tr>";
+			}	
 		}	  
 	}
 	else{
 		if(requestsCounter%2 ==0)
 		{
-			table.innerHTML += "<tr style = \"background-color:#E857EE;\"><th>" + requestID + "</th><th>" + requestType + "</th><th>" + dateSubmitted
-			+ "</th><th>" + employeeUsername + "</th></tr>";
+			if(table.rows[0].cells.length == 4){
+				table.innerHTML += "<tr style = \"background-color:#E857EE;\"><th>" + requestID + "</th><th>" + requestType + "</th><th>" + dateSubmitted
+				+ "</th><th>" + employeeUsername + "</th></tr>";
+			}
+			else{
+				table.innerHTML += "<tr style = \"background-color:#E857EE;\"><th>" + requestID + "</th><th>" + requestType + "</th><th>" + dateSubmitted
+				+ "</th><th>" + employeeUsername + "</th><th>" + response[i].managerUsername + "</th><th>" + response[i].accepted + "</tr>";
+			}
 		}
 		else{
-			table.innerHTML += "<tr style = \"background-color:#4EE9FA;\"><th>" + requestID + "</th><th>" + requestType + "</th><th>" + dateSubmitted
-			+ "</th><th>" + employeeUsername + "</th></tr>";
-		}                        
+			if(table.rows[0].cells.length == 4){
+				table.innerHTML += "<tr style = \"background-color:#4EE9FA;\"><th>" + requestID + "</th><th>" + requestType + "</th><th>" + dateSubmitted
+				+ "</th><th>" + employeeUsername + "</th></tr>"
+			}
+			else{
+				table.innerHTML += "<tr style = \"background-color:#4EE9FA;\"><th>" + requestID + "</th><th>" + requestType + "</th><th>" + dateSubmitted
+				+ "</th><th>" + employeeUsername + "</th><th>" + response[i].managerUsername + "</th><th>" + response[i].accepted + "</tr>";
+			}
+
+		}
 	}
-				
 }
 function checkRequestsFound(pRequestCounter, aRequestCounter, pTable, aTable){
 	if(pRequestCounter == 0){
@@ -183,7 +209,7 @@ function displayRequestImage(tableRow){
 		let dateSubmitted = tableRow.childNodes[4].innerHTML;
 		console.log("Yay");
 		const promise = new Promise((resolve, reject) =>{
-			xhr = new XMLHttpRequest();
+			let xhr = new XMLHttpRequest();
 			let fileName = tableRow.childNodes[6].innerHTML;
 			//let fileName = "elseq4";
 			xhr.open('GET', "http://localhost:8080/project_1/Pull_Image?filename=" + fileName, true);
@@ -193,10 +219,11 @@ function displayRequestImage(tableRow){
 			    	requestsTable.innerHTML = "<tr class =\"rowHeader\">" +
 					"<th><H5>Request ID</H5></th>" + "<th><H5>Request Type</H5></th><th><H5>Date Submitted</H5></th>" +
 					"<th><H5>Image</H5></th></tr>" ;
-
+			    	
+			    	
 			    	requestsTable.innerHTML += "<tr style = \"background-color:#4EE9FA;\"><th>" + requestID + "</th><th>" + 
 			    	requestType + "</th><th>" + dateSubmitted + "</th><th><img width = 400, " +
-			    			"height = 400 src = \"" + xhr.response + "\"></th></tr>";
+			    			"height = 400 src = \""+ xhr.response + "\"></th></tr>";
 			    	resolve();
 			    	
 			    }
@@ -205,8 +232,8 @@ function displayRequestImage(tableRow){
 		});
 		promise.then(()=>{
 			console.log("It worked!");	
-			approve = document.getElementById("approve").style.display = 'inline';
-			reject = document.getElementById("reject").style.display = 'inline';
+			approve = document.getElementById("approve");
+			reject = document.getElementById("reject");
 			approve.style.display = 'inline';
 			reject.style.display = 'inline';
 			approve.addEventListener("click", approveRequest);
@@ -215,8 +242,30 @@ function displayRequestImage(tableRow){
 	}
 }
 function approveRequest(){
-	
+	let table = document.getElementById("employeesTable")
+	let requestID = table.rows[1].childNodes[0].innerHTML + '';
+	let xhr = new XMLHttpRequest();
+	let data = new FormData();
+	data.append('action', 'approve');
+	data.append('requestID', requestID);
+	xhr.open("POST", "http://localhost:8080/project_1/ApproveRejectRequest", true);
+	xhr.onload = () => {
+	    if (xhr.status === 200 && xhr.readyState == 4) {
+	    	
+	    }
+	};
+	xhr.send(data);
 }
 function rejectRequest(){
-	
+	let xhr = new XMLHttpRequest();
+	let data = new FormData();
+	data.append('action', 'reject');
+	data.append('requestID', requestID);
+	xhr.open("POST", "http://localhost:8080/project_1/ApproveRejectRequest", true);
+	xhr.onload = () => {
+	    if (xhr.status === 200 && xhr.readyState == 4) {
+	    	
+	    }
+	};
+	xhr.send(data);
 }
