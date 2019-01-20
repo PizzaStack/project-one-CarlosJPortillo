@@ -209,26 +209,20 @@ function displayRequestImage(tableRow){
 		let dateSubmitted = tableRow.childNodes[4].innerHTML;
 		console.log("Yay");
 		const promise = new Promise((resolve, reject) =>{
-			let xhr = new XMLHttpRequest();
 			let fileName = tableRow.childNodes[6].innerHTML;
-			//let fileName = "elseq4";
-			xhr.open('GET', "http://localhost:8080/project_1/Pull_Image?filename=" + fileName, true);
-			xhr.onload = () => {
-			    if (xhr.status === 200 && xhr.readyState == 4) {
-			    	let requestsTable = document.getElementById("employeesTable");
-			    	requestsTable.innerHTML = "<tr class =\"rowHeader\">" +
-					"<th><H5>Request ID</H5></th>" + "<th><H5>Request Type</H5></th><th><H5>Date Submitted</H5></th>" +
-					"<th><H5>Image</H5></th></tr>" ;
-			    	
-			    	
-			    	requestsTable.innerHTML += "<tr style = \"background-color:#4EE9FA;\"><th>" + requestID + "</th><th>" + 
-			    	requestType + "</th><th>" + dateSubmitted + "</th><th><img width = 400, " +
-			    			"height = 400 src = \""+ xhr.response + "\"></th></tr>";
-			    	resolve();
-			    	
-			    }
-			};
-			xhr.send(null);
+			let pathToFile = "http://localhost:8080/project_1/receipt_images/" + fileName;
+
+			let requestsTable = document.getElementById("employeesTable");
+			requestsTable.innerHTML = "<tr class =\"rowHeader\">" +
+			"<th><H5>Request ID</H5></th>" + "<th><H5>Request Type</H5></th><th><H5>Date Submitted</H5></th>" +
+			"<th><H5>Image</H5></th></tr>" ;
+
+
+			requestsTable.innerHTML += "<tr style = \"background-color:#4EE9FA;\"><th>" + requestID + "</th><th>" + 
+			requestType + "</th><th>" + dateSubmitted + "</th><th><img width = 400, " +
+			"height = 400 src = \""+ pathToFile + "\"></th></tr>";
+			resolve();
+
 		});
 		promise.then(()=>{
 			console.log("It worked!");	
@@ -242,30 +236,39 @@ function displayRequestImage(tableRow){
 	}
 }
 function approveRequest(){
+	makeAjaxCallToApproveRejectService('approve');
+	let approve = document.getElementById("approve");
+	let reject = document.getElementById("reject");
+	approve.style.display = "none"
+	reject.style.display = "none"
+	
+	
+}
+function rejectRequest(){
+	makeAjaxCallToApproveRejectService('reject');
+	let approve = document.getElementById("approve");
+	let reject = document.getElementById("reject");
+	approve.style.display = 'none';
+	reject.style.display = 'none';
+}
+function makeAjaxCallToApproveRejectService(action){
 	let table = document.getElementById("employeesTable")
 	let requestID = table.rows[1].childNodes[0].innerHTML + '';
 	let xhr = new XMLHttpRequest();
 	let data = new FormData();
-	data.append('action', 'approve');
+	data.append('action', action);
 	data.append('requestID', requestID);
 	xhr.open("POST", "http://localhost:8080/project_1/ApproveRejectRequest", true);
 	xhr.onload = () => {
-	    if (xhr.status === 200 && xhr.readyState == 4) {
-	    	
-	    }
-	};
-	xhr.send(data);
-}
-function rejectRequest(){
-	let xhr = new XMLHttpRequest();
-	let data = new FormData();
-	data.append('action', 'reject');
-	data.append('requestID', requestID);
-	xhr.open("POST", "http://localhost:8080/project_1/ApproveRejectRequest", true);
-	xhr.onload = () => {
-	    if (xhr.status === 200 && xhr.readyState == 4) {
-	    	
-	    }
+		if (xhr.status === 200 && xhr.readyState == 4) {
+			if(action == "approve"){
+				alert("Request has been approved");
+			}
+			else{
+				alert("Request has been rejected");
+			}
+		}
+
 	};
 	xhr.send(data);
 }

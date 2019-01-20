@@ -10,6 +10,7 @@ public class ApproveRejectDAO extends DAO {
 			if(action.equals("approve")) {
 				stmt = connection.prepareCall("{call approve(?, ?)}");
 				stmt.setInt(1, requestID);
+				stmt.setInt(2, managerID);
 				stmt.executeUpdate();
 			}
 			else {
